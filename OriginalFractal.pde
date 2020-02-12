@@ -1,23 +1,31 @@
-private int x = 250;
-private int y = 250;
-private int di = 300;
-
 public void setup(){
-	size(500, 500);
-
+size(500, 500);
+rectMode(CENTER);
 }
 public void draw(){
-	background(255);
-	myFractal(x, y, di);
+background(255, 0, 0);
+
+reily(250, 250, 250);
+max(200, 200, 40);
 }
-public void myFractal(int x, int y, int di){
-	stroke(0);
-	fill(255, 0, 0, di/2);
-	ellipse(x, y, di, di);
-	if(di >= 10){
-		myFractal(x-di/2, y, di - di/4);
-		myFractal(x+ di/2, y, di - di/4);
-		myFractal(x, y + di/2, di - di/4);
-		myFractal(x, y- di/2, di - di/4);
-	}
+public void mouseDragged()
+{
+  stroke((float)(Math.random()*255), (float)(Math.random()*(255)), (float)(Math.random()*255));
+  reily(mouseX, mouseY, (int)(Math.random()*200));
+
+}
+public void reily(int x, int y, int len){
+if(len%2 == 0){
+fill((float)(Math.random()*255-len), (float)(Math.random()*(200-len)), 0);
+}else{
+fill(0, (float)(Math.random()*100-len), (float)(Math.random()*255+len));
+}
+rect(x, y, len, len);
+if(len > 40){
+reily(x + len/2, y, len/2);
+reily(x - len/2, y, len/2);
+reily(x, y + len/2, len/2);
+reily(x, y -len/2, len/2);
+}
+
 }
